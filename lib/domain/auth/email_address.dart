@@ -1,10 +1,15 @@
 import 'dart:convert';
 
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:flutter/foundation.dart';
+
+part 'email_address.freezed.dart';
 
 @immutable
 class EmailAddress {
-  final String value;
+  final Either<ValueFailure<String>, String> value;
 
   factory EmailAddress(String input) {
     assert(input != null);
@@ -54,19 +59,23 @@ class EmailAddress {
   int get hashCode => value.hashCode;
 }
 
-String validateEmailAddress(String input) {
+Either<ValueFailure<String>, String> validateEmailAddress(String input) {
   //FIXME: change this regexp pattern with more robust
   const emailRegex =
       r"""^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+""";
   if (RegExp(emailRegex).hasMatch(input)) {
-    return input;
+    return right(input);
   } else {
-    throw InvalidEmailException(failedValue: input);
+    return left(ValueFailure.invalidEmail(failedValue: input));
   }
 }
 
-class InvalidEmailException implements Exception {
-  final String failedValue;
-
-  InvalidEmailException({@required this.failedValue});
+@freezed
+abstract class ValueFailure<T> with _$ValueFailure<T> {
+  const factory ValueFailure.invalidEmail({
+    @required T failedValue,
+  }) = InvalidEmail<T>;
+  const factory ValueFailure.shortPassword({
+    @required T failedValue,
+  }) = ShortPassword<T>;
 }
