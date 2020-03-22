@@ -1,11 +1,9 @@
-import 'dart:convert';
-
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:notes/domain/core/value_objects.dart';
-
-part 'value_objects.freezed.dart';
+import 'package:notes/domain/core/value_validators.dart';
+import 'package:notes/domain/core/failures.dart';
 
 @immutable
 class EmailAddress extends ValueObject<String>{
@@ -17,26 +15,4 @@ class EmailAddress extends ValueObject<String>{
   }
 
   const EmailAddress._(this.value);
-  
-}
-
-Either<ValueFailure<String>, String> validateEmailAddress(String input) {
-  //FIXME: change this regexp pattern with more robust
-  const emailRegex =
-      r"""^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+""";
-  if (RegExp(emailRegex).hasMatch(input)) {
-    return right(input);
-  } else {
-    return left(ValueFailure.invalidEmail(failedValue: input));
-  }
-}
-
-@freezed
-abstract class ValueFailure<T> {
-  const factory ValueFailure.invalidEmail({
-    @required T failedValue,
-  }) = InvalidEmail<T>;
-  const factory ValueFailure.shortPassword({
-    @required T failedValue,
-  }) = ShortPassword<T>;
 }
