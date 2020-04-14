@@ -1,4 +1,4 @@
-package com.example.notes
+package com.piotrek1543.notes
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity
