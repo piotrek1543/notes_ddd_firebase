@@ -1,20 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:notes/presentaton/sign_in/sign_in_page.dart';
 
 class AppWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Material App',
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Material App Bar'),
-        ),
-        body: Center(
-          child: Container(
-            child: Text('Hello World'),
-          ),
-        ),
-      ),
+      home: SignInPage()
     );
   }
 }
