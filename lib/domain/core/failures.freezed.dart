@@ -12,13 +12,13 @@ T _$identity<T>(T value) => value;
 class _$ValueFailureTearOff {
   const _$ValueFailureTearOff();
 
-  InvalidEmail<T> invalidEmail<T>({@required T failedValue}) {
+  InvalidEmail<T> invalidEmail<T>({@required String failedValue}) {
     return InvalidEmail<T>(
       failedValue: failedValue,
     );
   }
 
-  ShortPassword<T> shortPassword<T>({@required T failedValue}) {
+  ShortPassword<T> shortPassword<T>({@required String failedValue}) {
     return ShortPassword<T>(
       failedValue: failedValue,
     );
@@ -29,17 +29,17 @@ class _$ValueFailureTearOff {
 const $ValueFailure = _$ValueFailureTearOff();
 
 mixin _$ValueFailure<T> {
-  T get failedValue;
+  String get failedValue;
 
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result invalidEmail(T failedValue),
-    @required Result shortPassword(T failedValue),
+    @required Result invalidEmail(String failedValue),
+    @required Result shortPassword(String failedValue),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result invalidEmail(T failedValue),
-    Result shortPassword(T failedValue),
+    Result invalidEmail(String failedValue),
+    Result shortPassword(String failedValue),
     @required Result orElse(),
   });
   @optionalTypeArgs
@@ -61,7 +61,7 @@ abstract class $ValueFailureCopyWith<T, $Res> {
   factory $ValueFailureCopyWith(
           ValueFailure<T> value, $Res Function(ValueFailure<T>) then) =
       _$ValueFailureCopyWithImpl<T, $Res>;
-  $Res call({T failedValue});
+  $Res call({String failedValue});
 }
 
 class _$ValueFailureCopyWithImpl<T, $Res>
@@ -78,7 +78,7 @@ class _$ValueFailureCopyWithImpl<T, $Res>
   }) {
     return _then(_value.copyWith(
       failedValue:
-          failedValue == freezed ? _value.failedValue : failedValue as T,
+          failedValue == freezed ? _value.failedValue : failedValue as String,
     ));
   }
 }
@@ -89,7 +89,7 @@ abstract class $InvalidEmailCopyWith<T, $Res>
           InvalidEmail<T> value, $Res Function(InvalidEmail<T>) then) =
       _$InvalidEmailCopyWithImpl<T, $Res>;
   @override
-  $Res call({T failedValue});
+  $Res call({String failedValue});
 }
 
 class _$InvalidEmailCopyWithImpl<T, $Res>
@@ -108,31 +108,21 @@ class _$InvalidEmailCopyWithImpl<T, $Res>
   }) {
     return _then(InvalidEmail<T>(
       failedValue:
-          failedValue == freezed ? _value.failedValue : failedValue as T,
+          failedValue == freezed ? _value.failedValue : failedValue as String,
     ));
   }
 }
 
-class _$InvalidEmail<T>
-    with DiagnosticableTreeMixin
-    implements InvalidEmail<T> {
+class _$InvalidEmail<T> implements InvalidEmail<T> {
   const _$InvalidEmail({@required this.failedValue})
       : assert(failedValue != null);
 
   @override
-  final T failedValue;
+  final String failedValue;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'ValueFailure<$T>.invalidEmail(failedValue: $failedValue)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'ValueFailure<$T>.invalidEmail'))
-      ..add(DiagnosticsProperty('failedValue', failedValue));
   }
 
   @override
@@ -155,8 +145,8 @@ class _$InvalidEmail<T>
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result invalidEmail(T failedValue),
-    @required Result shortPassword(T failedValue),
+    @required Result invalidEmail(String failedValue),
+    @required Result shortPassword(String failedValue),
   }) {
     assert(invalidEmail != null);
     assert(shortPassword != null);
@@ -166,8 +156,8 @@ class _$InvalidEmail<T>
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result invalidEmail(T failedValue),
-    Result shortPassword(T failedValue),
+    Result invalidEmail(String failedValue),
+    Result shortPassword(String failedValue),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -204,10 +194,11 @@ class _$InvalidEmail<T>
 }
 
 abstract class InvalidEmail<T> implements ValueFailure<T> {
-  const factory InvalidEmail({@required T failedValue}) = _$InvalidEmail<T>;
+  const factory InvalidEmail({@required String failedValue}) =
+      _$InvalidEmail<T>;
 
   @override
-  T get failedValue;
+  String get failedValue;
   @override
   $InvalidEmailCopyWith<T, InvalidEmail<T>> get copyWith;
 }
@@ -218,7 +209,7 @@ abstract class $ShortPasswordCopyWith<T, $Res>
           ShortPassword<T> value, $Res Function(ShortPassword<T>) then) =
       _$ShortPasswordCopyWithImpl<T, $Res>;
   @override
-  $Res call({T failedValue});
+  $Res call({String failedValue});
 }
 
 class _$ShortPasswordCopyWithImpl<T, $Res>
@@ -237,31 +228,21 @@ class _$ShortPasswordCopyWithImpl<T, $Res>
   }) {
     return _then(ShortPassword<T>(
       failedValue:
-          failedValue == freezed ? _value.failedValue : failedValue as T,
+          failedValue == freezed ? _value.failedValue : failedValue as String,
     ));
   }
 }
 
-class _$ShortPassword<T>
-    with DiagnosticableTreeMixin
-    implements ShortPassword<T> {
+class _$ShortPassword<T> implements ShortPassword<T> {
   const _$ShortPassword({@required this.failedValue})
       : assert(failedValue != null);
 
   @override
-  final T failedValue;
+  final String failedValue;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'ValueFailure<$T>.shortPassword(failedValue: $failedValue)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'ValueFailure<$T>.shortPassword'))
-      ..add(DiagnosticsProperty('failedValue', failedValue));
   }
 
   @override
@@ -284,8 +265,8 @@ class _$ShortPassword<T>
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result invalidEmail(T failedValue),
-    @required Result shortPassword(T failedValue),
+    @required Result invalidEmail(String failedValue),
+    @required Result shortPassword(String failedValue),
   }) {
     assert(invalidEmail != null);
     assert(shortPassword != null);
@@ -295,8 +276,8 @@ class _$ShortPassword<T>
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result invalidEmail(T failedValue),
-    Result shortPassword(T failedValue),
+    Result invalidEmail(String failedValue),
+    Result shortPassword(String failedValue),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -333,10 +314,11 @@ class _$ShortPassword<T>
 }
 
 abstract class ShortPassword<T> implements ValueFailure<T> {
-  const factory ShortPassword({@required T failedValue}) = _$ShortPassword<T>;
+  const factory ShortPassword({@required String failedValue}) =
+      _$ShortPassword<T>;
 
   @override
-  T get failedValue;
+  String get failedValue;
   @override
   $ShortPasswordCopyWith<T, ShortPassword<T>> get copyWith;
 }
