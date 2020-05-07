@@ -16,6 +16,7 @@ class SignInForm extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 130),
               ),
+              const SizedBox(height: 8),
               TextFormField(
                 decoration: const InputDecoration(
                   prefixIcon: Icon(Icons.email),
@@ -23,6 +24,7 @@ class SignInForm extends StatelessWidget {
                 ),
                 autocorrect: false,
               ),
+              const SizedBox(height: 8),
               TextFormField(
                 decoration: const InputDecoration(
                   prefixIcon: Icon(Icons.lock),
@@ -31,6 +33,34 @@ class SignInForm extends StatelessWidget {
                 autocorrect: false,
                 obscureText: true,
               ),
+              const SizedBox(height: 8),
+              Row(
+                children: <Widget>[
+                  Expanded(
+                    child: FlatButton(
+                      onPressed: null,
+                      child: const Text('SIGN IN'),
+                    ),
+                  ),
+                  Expanded(
+                    child: FlatButton(
+                      onPressed: null,
+                      child: const Text('REGISTER'),
+                    ),
+                  ),
+                ],
+              ),
+              RaisedButton(
+                onPressed: null,
+                color: Colors.lightBlue,
+                child: const Text(
+                  'SIGN IN WITH GOOGLE',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              )
             ],
           ),
         );
