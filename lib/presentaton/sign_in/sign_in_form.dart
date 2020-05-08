@@ -48,6 +48,17 @@ class SignInForm extends StatelessWidget {
                 ),
                 autocorrect: false,
                 obscureText: true,
+                onChanged: (value) => context
+                    .bloc<SignInFormBloc>()
+                    .add(SignInFormEvent.passwordChanged(value)),
+                validator: (_) =>
+                    context.bloc<SignInFormBloc>().state.password.value.fold(
+                          (f) => f.maybeMap(
+                            shortPassword: (_) => 'Short Password',
+                            orElse: () => null,
+                          ),
+                          (_) => null,
+                        ),
               ),
               const SizedBox(height: 8),
               Row(
