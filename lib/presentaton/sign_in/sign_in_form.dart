@@ -9,6 +9,7 @@ class SignInForm extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         return Form(
+          autovalidate: state.showErrorMessages,
           child: ListView(
             children: <Widget>[
               const Text(
@@ -23,6 +24,21 @@ class SignInForm extends StatelessWidget {
                   labelText: 'Email',
                 ),
                 autocorrect: false,
+                onChanged: (value) => context
+                    .bloc<SignInFormBloc>()
+                    .add(SignInFormEvent.emailChanged(value)),
+                validator: (_) => context
+                    .bloc<SignInFormBloc>()
+                    .state
+                    .emailAddress
+                    .value
+                    .fold(
+                      (f) => f.maybeMap(
+                        invalidEmail: (_) => 'Invalid Email',
+                        orElse: () => null,
+                      ),
+                      (_) => null,
+                    ),
               ),
               const SizedBox(height: 8),
               TextFormField(
