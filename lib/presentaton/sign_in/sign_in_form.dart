@@ -65,20 +65,34 @@ class SignInForm extends StatelessWidget {
                 children: <Widget>[
                   Expanded(
                     child: FlatButton(
-                      onPressed: null,
+                      onPressed: () {
+                        context.bloc<SignInFormBloc>().add(
+                              const SignInFormEvent
+                                  .signInWithEmailAndPasswordPressed(),
+                            );
+                      },
                       child: const Text('SIGN IN'),
                     ),
                   ),
                   Expanded(
                     child: FlatButton(
-                      onPressed: null,
+                      onPressed: () {
+                        context.bloc<SignInFormBloc>().add(
+                              const SignInFormEvent
+                                  .registerWithEmailAndPasswordPressed(),
+                            );
+                      },
                       child: const Text('REGISTER'),
                     ),
                   ),
                 ],
               ),
               RaisedButton(
-                onPressed: null,
+                onPressed: () {
+                  context
+                      .bloc<SignInFormBloc>()
+                      .add(const SignInFormEvent.signInWithGooglePressed());
+                },
                 color: Colors.lightBlue,
                 child: const Text(
                   'SIGN IN WITH GOOGLE',
