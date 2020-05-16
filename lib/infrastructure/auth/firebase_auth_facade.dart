@@ -6,8 +6,8 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
 import 'package:notes/domain/auth/auth_failure.dart';
 import 'package:notes/domain/auth/i_auth_facade.dart';
+import 'package:notes/domain/auth/user.dart';
 import 'package:notes/domain/auth/value_objects.dart';
-
 
 @lazySingleton
 @RegisterAs(IAuthFacade)
@@ -51,7 +51,7 @@ class FirebaseAuthFacade implements IAuthFacade {
   }) async {
     final emailAddressStr = emailAddress.getOrCrash();
     final passwordStr = password.getOrCrash();
-    
+
     try {
       await _firebaseAuth.signInWithEmailAndPassword(
         email: emailAddressStr,
