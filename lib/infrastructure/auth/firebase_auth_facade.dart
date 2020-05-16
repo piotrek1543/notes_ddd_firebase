@@ -8,11 +8,11 @@ import 'package:notes/domain/auth/auth_failure.dart';
 import 'package:notes/domain/auth/i_auth_facade.dart';
 import 'package:notes/domain/auth/user.dart';
 import 'package:notes/domain/auth/value_objects.dart';
-import 'package:notes/domain/core/value_objects.dart';
+import './firebase_user_mapper.dart';
+
 
 @lazySingleton
 @RegisterAs(IAuthFacade)
-//TODO: Add missing iOS Firebase configuration (for now only Android)
 class FirebaseAuthFacade implements IAuthFacade {
   final FirebaseAuth _firebaseAuth;
   final GoogleSignIn _googleSignIn;
@@ -23,9 +23,10 @@ class FirebaseAuthFacade implements IAuthFacade {
   );
 
   @override
-  Future<Option<User>> getSignedInUser() =>
-      _firebaseAuth.currentUser().then((firebaseUser) =>
-          some(User(id: UniqueId.fromUniqueString(firebaseUser.uid))));
+  @override
+  Future<Option<User>> getSignedInUser() => _firebaseAuth
+      .currentUser()
+      .then((firebaseUser) => optionOf(firebaseUser?.toDomain()));
 
   @override
   Future<Either<AuthFailure, Unit>> registerWithEmailAndPassword({
