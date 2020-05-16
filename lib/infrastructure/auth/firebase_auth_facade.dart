@@ -10,7 +10,6 @@ import 'package:notes/domain/auth/user.dart';
 import 'package:notes/domain/auth/value_objects.dart';
 import './firebase_user_mapper.dart';
 
-
 @lazySingleton
 @RegisterAs(IAuthFacade)
 class FirebaseAuthFacade implements IAuthFacade {
@@ -98,8 +97,8 @@ class FirebaseAuthFacade implements IAuthFacade {
   }
 
   @override
-  Future<void> signOut() {
-    // TODO: implement signOut
-    throw UnimplementedError();
-  }
+  Future<void> signOut() => Future.wait([
+        _googleSignIn.signOut(),
+        _firebaseAuth.signOut(),
+      ]);
 }
