@@ -8,6 +8,7 @@ import 'package:notes/domain/auth/auth_failure.dart';
 import 'package:notes/domain/auth/i_auth_facade.dart';
 import 'package:notes/domain/auth/user.dart';
 import 'package:notes/domain/auth/value_objects.dart';
+import 'package:notes/domain/core/value_objects.dart';
 
 @lazySingleton
 @RegisterAs(IAuthFacade)
@@ -20,6 +21,11 @@ class FirebaseAuthFacade implements IAuthFacade {
     this._firebaseAuth,
     this._googleSignIn,
   );
+
+  @override
+  Future<Option<User>> getSignedInUser() =>
+      _firebaseAuth.currentUser().then((firebaseUser) =>
+          some(User(id: UniqueId.fromUniqueString(firebaseUser.uid))));
 
   @override
   Future<Either<AuthFailure, Unit>> registerWithEmailAndPassword({
@@ -88,5 +94,11 @@ class FirebaseAuthFacade implements IAuthFacade {
     } on PlatformException catch (_) {
       return left(const AuthFailure.serverError());
     }
+  }
+
+  @override
+  Future<void> signOut() {
+    // TODO: implement signOut
+    throw UnimplementedError();
   }
 }
