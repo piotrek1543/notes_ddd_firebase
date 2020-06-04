@@ -7,6 +7,7 @@ import 'package:notes/domain/core/failures.dart';
 
 @immutable
 class EmailAddress extends ValueObject<String>{
+  @override
   final Either<ValueFailure<String>, String> value;
 
   factory EmailAddress(String input) {
